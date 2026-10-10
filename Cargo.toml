@@ -50,6 +50,7 @@ mesalink = ["curl-sys/mesalink"] # MesaLink TLS backend
 http2 = ["curl-sys/http2"]
 spnego = ["curl-sys/spnego"]
 rustls = ["curl-sys/rustls"]
+rustls-ring = ["curl-sys/rustls-ring"]
 static-curl = ["curl-sys/static-curl"]
 apple-sectrust = ["ssl", "static-curl", "curl-sys/apple-sectrust"]
 static-ssl = ["curl-sys/static-ssl"]
