@@ -348,6 +348,34 @@ fn main() {
             .file("curl/lib/vauth/vauth.c");
     }
 
+    if cfg!(feature = "minimal") {
+        // HTTP(S) only, nothing libcurl does on the side: smaller binary,
+        // fewer relocations and less startup work per process
+        for name in [
+            "CURL_DISABLE_ALTSVC",
+            "CURL_DISABLE_AWS",
+            "CURL_DISABLE_COOKIES",
+            "CURL_DISABLE_DOH",
+            "CURL_DISABLE_FILE",
+            "CURL_DISABLE_FTP",
+            "CURL_DISABLE_HSTS",
+            "CURL_DISABLE_HTTP_AUTH",
+            "CURL_DISABLE_IPFS",
+            "CURL_DISABLE_KERBEROS_AUTH",
+            "CURL_DISABLE_NEGOTIATE_AUTH",
+            "CURL_DISABLE_NETRC",
+            "CURL_DISABLE_NTLM",
+            "CURL_DISABLE_PARSEDATE",
+            "CURL_DISABLE_PROGRESS_METER",
+            "CURL_DISABLE_SHA512_256",
+            "CURL_DISABLE_SHUFFLE_DNS",
+            "CURL_DISABLE_SOCKETPAIR",
+            "CURL_DISABLE_WEBSOCKETS",
+        ] {
+            cfg.define(name, None);
+        }
+    }
+
     // Configure TLS backend. Since Cargo does not support mutually exclusive
     // features, make sure we only compile one vtls.
     if cfg!(any(feature = "rustls", feature = "rustls-ring")) {

@@ -51,6 +51,8 @@ http2 = ["libnghttp2-sys"]
 mesalink = []
 rustls = ["rustls-ffi", "rustls-ffi/aws-lc-rs", "rustls-ffi/prefer-post-quantum"]
 rustls-ring = ["rustls-ffi", "rustls-ffi/ring"]
+# with static-curl: an HTTP(S)-only libcurl, nothing on the side
+minimal = []
 static-curl = []
 apple-sectrust = ["ssl", "static-curl"]
 windows-static-ssl = []
